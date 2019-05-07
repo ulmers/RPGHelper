@@ -69,10 +69,18 @@ module.exports.oauth = (req, res) => {
     console.log('code: ' + req.query.code);
 
     dns.reverse(host, (err, hostnames) => {
-        hostnames.forEach((hostname) => {
-            if(hostname.includes('slack.com'))
-                res.status(302).end();
-        })
+
+        if(err)
+            console.log(err);
+
+        if(hostnames)
+        {
+            hostnames.forEach((hostname) => {
+                if(hostname.includes('slack.com'))
+                    res.status(302).end();
+            });
+        }
+
     });
 
     let options = {
