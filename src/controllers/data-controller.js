@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var rn = require('random-number');
 var request = require('request');
 
-var Character = require('../models/Character');
+//var Character = require('../models/Character');
 
 // mongoose.connection.on('open', function(){
 //
@@ -33,7 +33,7 @@ module.exports.roll = (req, res) => {
 
         for(var i = 0; i < args[0]; i++)
         {
-            if(i != 0)
+            if(i !== 0)
                 sResult += '+';
 
             var num = gen(1, args[1], true);
@@ -48,7 +48,7 @@ module.exports.roll = (req, res) => {
         grandTotal += sum;
     });
 
-    sResult += 'Total: ' + grandTotal
+    sResult += 'Total: ' + grandTotal;
 
 
     var responseJSON ={
@@ -61,7 +61,7 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
-    var host = req.socket.remoteSource;
+    var host = res.remoteAddress;
 
     console.log('host: ' + host);
 
