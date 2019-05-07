@@ -62,16 +62,13 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
-
-    res.status(302).end();
-
     var host = req.ip;
 
     console.log('host: ' + host);
 
     console.log('code: ' + req.query.code);
 
-    dns.reverse(host, (err, hostnames) => {
+    dns.reverse(host.replace('::ffff:', ''), (err, hostnames) => {
 
         if(err)
             console.log(err);
