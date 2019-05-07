@@ -62,6 +62,9 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
+
+    res.status(302).end();
+
     var host = req.ip;
 
     console.log('host: ' + host);
