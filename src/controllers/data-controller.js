@@ -1,6 +1,7 @@
 //var mongoose = require('mongoose');
 var rn = require('random-number');
 var request = require('request');
+var dns = require('dns');
 
 //var Character = require('../models/Character');
 
@@ -51,7 +52,7 @@ module.exports.roll = (req, res) => {
     sResult += 'Total: ' + grandTotal;
 
 
-    var responseJSON ={
+    let responseJSON ={
         response_type: 'in_channel',
         text: sResult
     };
@@ -67,12 +68,14 @@ module.exports.oauth = (req, res) => {
 
     console.log('code: ' + req.query.code);
 
-    if(host.includes('slack.com'))
-    {
-        res.status(302).end()
-    }
+    dns.reverse(host, (err, hostnames) => {
+        hostnames.forEach((hostname) => {
+            if(hostname.includes('slack.com'))
+                res.status(302).end();
+        })
+    });
 
-    var options = {
+    let options = {
         uri: 'https://slack.com/api/oauth.access?code='
             +req.query.code+
             '&client_id='+process.env.CLIENT_ID+
@@ -82,7 +85,7 @@ module.exports.oauth = (req, res) => {
     };
 
     request(options, (error, response, body) => {
-        var JSONresponse = JSON.parse(body);
+        let JSONresponse = JSON.parse(body);
         if (!JSONresponse.ok){
             console.log(JSONresponse);
             res.send("Error encountered: \n"+JSON.stringify(JSONresponse)).status(200).end();
