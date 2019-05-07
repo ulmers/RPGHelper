@@ -61,7 +61,7 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
-    var host = req.hostname;
+    var host = req.get('origin');
 
     console.log('host: ' + host);
 
