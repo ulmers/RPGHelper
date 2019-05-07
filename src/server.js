@@ -13,8 +13,8 @@ config.setConfig();
 
 app.use(bodyparser.urlencoded({extended: true}));
 
-app.listen(3000, function(){
-    console.log('listening on 3000')
+app.listen(443, function(){
+    console.log('listening on 443')
 });
 
 //API Calls
