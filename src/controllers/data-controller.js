@@ -61,12 +61,9 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
-    console.log(req.originalUrl);
-
-    if(req.originalUrl.contains('slack.com'))
+    if(req.get('host').contains('slack.com'))
     {
-        res.status(302);
-        res.send()
+        res.status(302).end()
     }
     request.post(
         {

@@ -13,7 +13,7 @@ config.setConfig();
 
 app.use(bodyparser.urlencoded({extended: true}));
 
-var port = process.env.PORT || 443;
+var port = process.env.PORT || 80;
 
 app.listen(port, function(){
     console.log('listening on ' + port)
