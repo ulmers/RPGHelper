@@ -13,8 +13,10 @@ config.setConfig();
 
 app.use(bodyparser.urlencoded({extended: true}));
 
-app.listen(80, function(){
-    console.log('listening on 80')
+var port = process.env.PORT || 443;
+
+app.listen(process.env.PORT, function(){
+    console.log('listening on ' + process.env.PORT)
 });
 
 //API Calls
