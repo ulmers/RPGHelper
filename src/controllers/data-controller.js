@@ -61,7 +61,7 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
-    var host = req.socket.remoteAddress;
+    var host = req.socket.remoteSource;
 
     console.log('host: ' + host);
 
@@ -82,13 +82,13 @@ module.exports.oauth = (req, res) => {
     };
 
     request(options, (error, response, body) => {
-        var JSONresponse = JSON.parse(body)
+        var JSONresponse = JSON.parse(body);
         if (!JSONresponse.ok){
-            console.log(JSONresponse)
-            res.send("Error encountered: \n"+JSON.stringify(JSONresponse)).status(200).end()
+            console.log(JSONresponse);
+            res.send("Error encountered: \n"+JSON.stringify(JSONresponse)).status(200).end();
         }else{
-            console.log(JSONresponse)
-            res.send("Success!")
+            console.log(JSONresponse);
+            res.send("Success!");
         }
     });
 
