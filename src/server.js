@@ -15,8 +15,8 @@ app.use(bodyparser.urlencoded({extended: true}));
 
 var port = process.env.PORT || 443;
 
-app.listen(process.env.PORT, function(){
-    console.log('listening on ' + process.env.PORT)
+app.listen(port, function(){
+    console.log('listening on ' + port)
 });
 
 //API Calls
