@@ -62,26 +62,7 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
-    var host = req.ip;
-
-    console.log('host: ' + host);
-
     console.log('code: ' + req.query.code);
-
-    dns.reverse(host.replace('::ffff:', ''), (err, hostnames) => {
-
-        if(err)
-            console.log(err);
-
-        if(hostnames)
-        {
-            hostnames.forEach((hostname) => {
-                if(hostname.includes('slack.com'))
-                    res.status(302).end();
-            });
-        }
-
-    });
 
     let options = {
         uri: 'https://slack.com/api/oauth.access?code='
@@ -103,4 +84,5 @@ module.exports.oauth = (req, res) => {
         }
     });
 
+    res.redirect('https://slack.com/');
 };
