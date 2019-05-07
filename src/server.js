@@ -23,4 +23,4 @@ app.listen(port, function(){
 
 app.post('/roll', dataController.roll);
 
-app.post('/oauth', dataController.oauth);
+app.get('/oauth', dataController.oauth);

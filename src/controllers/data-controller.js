@@ -61,23 +61,35 @@ module.exports.roll = (req, res) => {
 
 module.exports.oauth = (req, res) => {
 
-    if(req.get('host').contains('slack.com'))
+    var host = req.get('host').toString();
+
+    console.log('host: ' + host);
+
+    console.log('code: ' + req.body.code);
+
+    if(host.includes('slack.com'))
     {
         res.status(302).end()
     }
     request.post(
         {
-            uri: 'https://slack.com/api/oauth.access',
+            url: 'https://slack.com/api/oauth.access',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: {
                 client_id: '615403106003.620521868369',
                 client_secret: 'f700f2c409f0ea70b944a4e2c683efe3',
-
+                code: req.body.code
             }
-        }
+        },
+        (error, response, body) => {
+            console.log('error:', error);
+            console.log('statusCode:', response && response.statusCode);
+            console.log('body:', body);
 
+            console.log(JSON.parse(body).access_token)
+        }
     )
 
 };
