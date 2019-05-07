@@ -62,8 +62,10 @@ module.exports.roll = (req, res) => {
 module.exports.oauth = (req, res) => {
 
     if(req.originalUrl.contains('slack.com'))
+    {
         res.status(302);
-
+        res.send()
+    }
     request.post(
         {
             uri: 'https://slack.com/api/oauth.access',
