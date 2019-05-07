@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var rn = require('random-number');
+var request = require('request');
 
 var Character = require('../models/Character');
 
@@ -9,12 +10,6 @@ var Character = require('../models/Character');
 
 var gen = rn.generator();
 
-// CREATE
-
-// READ
-module.exports.helloWorld = (req, res) => {
-    res.send('Hello World!');
-};
 module.exports.roll = (req, res) => {
 
     console.log('rolling...');
@@ -64,4 +59,24 @@ module.exports.roll = (req, res) => {
     res.send(responseJSON);
 };
 
-// DELETE
+module.exports.oauth = (req, res) => {
+
+    if(req.originalUrl.contains('slack.com'))
+        res.status(302);
+
+    request.post(
+        {
+            uri: 'https://slack.com/api/oauth.access',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: {
+                client_id: '615403106003.620521868369',
+                client_secret: 'f700f2c409f0ea70b944a4e2c683efe3',
+
+            }
+        }
+
+    )
+
+};

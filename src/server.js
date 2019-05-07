@@ -23,3 +23,4 @@ app.listen(process.env.PORT, function(){
 
 app.post('/roll', dataController.roll);
 
+app.post('/oauth', dataController.oauth);
